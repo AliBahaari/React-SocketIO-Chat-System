@@ -57,11 +57,12 @@ function App() {
     <div>
       <ToastContainer bodyStyle={{ fontFamily: "Roboto Mono" }} />
 
-      <p>
+      <p className="boldFontWeight">
         Your ID is: <small style={{ color: "Blue" }}>{id}</small>
       </p>
 
       <div>
+        <p className="boldFontWeight">Rooms:</p>
         {rooms.map((room, index) => (
           <p
             style={{

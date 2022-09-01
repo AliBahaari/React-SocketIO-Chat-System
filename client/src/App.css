@@ -42,3 +42,7 @@ input, button {
 .messageBox > button:hover {
   transform: translateX(-3px)
 }
+
+.boldFontWeight {
+    font-weight: 700;
+}
