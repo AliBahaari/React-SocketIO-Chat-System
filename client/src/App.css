@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap');
+
+html {
+    font-family: 'Roboto Mono';
+}
+
+input, button {
+    all: unset;
+}
+
+.messageBox {
+    display: flex;
+    flex-direction: row;
+    gap: 10px
+}
+
+.messageBox > input {
+    flex: 3;
+}
+
+.messageBox > button {
+    flex: 1;
+}
+
+.messageBox > input {
+    border: 1px solid Gray;
+    padding-left: 4px;
+    padding-bottom: 6px;
+    padding-right: 4px;
+}
+
+.messageBox > button{
+    background-color: Blue;
+    color: White;
+    padding-left: 4px;
+    padding-bottom: 6px;
+    padding-right: 4px;
+    cursor: pointer;
+    transition: linear 80ms;
+}
+
+.messageBox > button:hover {
+  transform: translateX(-3px)
+}
