@@ -4,7 +4,7 @@ The project is a small chat system which socket server has been written by Socke
 
 ## Screenshots
 
-![Chat System](https://user-images.githubusercontent.com/8419324/187885947-c2798f6e-8c31-406f-ba00-896f9f1fb15f.jpg)
+![Chat System](https://user-images.githubusercontent.com/8419324/188267274-dc46bd41-5fad-4cfe-9c38-89604d1896e4.jpg)
 
 ## License
 
