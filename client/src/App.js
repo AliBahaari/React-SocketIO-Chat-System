@@ -12,14 +12,27 @@ function App() {
   const [rooms] = useState(["Foo", "Bar"]);
   const [selectedRoom, setSelectedRoom] = useState();
   const [messages, setMessages] = useState([]);
+  const [privateRoom, setPrivateRoom] = useState("");
+  const [isPriavteRoomJoined, setIsPriavteRoomJoined] = useState(false);
+
+  const joinPrivateRoom = () => {
+    socket.emit("join_private_room", privateRoom);
+    setIsPriavteRoomJoined(true);
+  };
 
   const sendMessage = () => {
     setMessages((prevState) => [...prevState, message]);
-
-    socket.emit("send_message", {
-      message,
-      roomNumbers: selectedRoom,
-    });
+    if (!privateRoom) {
+      socket.emit("send_message", {
+        message,
+        roomNumbers: selectedRoom,
+      });
+    } else {
+      socket.emit("send_message", {
+        message,
+        roomNumbers: privateRoom,
+      });
+    }
   };
 
   const joinRoom = (room) => {
@@ -53,6 +66,26 @@ function App() {
     });
   }, []);
 
+  useEffect(() => {
+    socket.on("user_joined_room", (room) => {
+      toast.info(`🕶 A user joined ${room}!`, {
+        position: "bottom-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: false,
+        progress: undefined,
+      });
+    });
+  }, []);
+
+  const leavePrivateRoom = () => {
+    socket.emit("leave_private_room", privateRoom);
+    setPrivateRoom("");
+    setIsPriavteRoomJoined(false);
+  };
+
   return (
     <div>
       <ToastContainer bodyStyle={{ fontFamily: "Roboto Mono" }} />
@@ -76,13 +109,33 @@ function App() {
         ))}
       </div>
 
-      <div className="messageBox">
+      <div className="box">
+        <input
+          type="text"
+          style={{
+            backgroundColor: isPriavteRoomJoined ? "#EEE" : "Transparent",
+          }}
+          placeholder="Private Room..."
+          disabled={isPriavteRoomJoined}
+          onChange={(event) => setPrivateRoom(event.target.value)}
+          onKeyDown={(event) => event.key === "Enter" && joinPrivateRoom()}
+        />
+        <button onClick={joinPrivateRoom}>Join Private Room</button>
+        <button style={{ backgroundColor: "Red" }} onClick={leavePrivateRoom}>
+          Leave
+        </button>
+      </div>
+
+      <div className="box">
         <input
           type="text"
           placeholder="Message..."
           onChange={(event) => setMessage(event.target.value)}
+          onKeyDown={(event) => event.key === "Enter" && sendMessage()}
         />
-        <button onClick={sendMessage}>Send</button>
+        <button onKeyDown={sendMessage} onClick={sendMessage}>
+          Send
+        </button>
       </div>
 
       <div>

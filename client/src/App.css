@@ -8,28 +8,29 @@ input, button {
     all: unset;
 }
 
-.messageBox {
+.box {
     display: flex;
     flex-direction: row;
-    gap: 10px
+    gap: 10px;
+    margin-bottom: 10px;
 }
 
-.messageBox > input {
+.box > input {
     flex: 3;
 }
 
-.messageBox > button {
+.box > button {
     flex: 1;
 }
 
-.messageBox > input {
+.box > input {
     border: 1px solid Gray;
     padding-left: 4px;
     padding-bottom: 6px;
     padding-right: 4px;
 }
 
-.messageBox > button{
+.box > button{
     background-color: Blue;
     color: White;
     padding-left: 4px;
@@ -39,7 +40,7 @@ input, button {
     transition: linear 80ms;
 }
 
-.messageBox > button:hover {
+.box > button:hover {
   transform: translateX(-3px)
 }
 
